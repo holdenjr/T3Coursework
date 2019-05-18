@@ -5,9 +5,9 @@ import java.awt.event.*;
 public class twooterUI extends JFrame 
 {
     JLabel label1, usrLabel, pswLabel;
-    JTextField tf1;
-    JButton btn1;
-    JPasswordField p1;
+    JTextField usrTextInput;
+    JButton loginButton;
+    JPasswordField passwordInput;
 
     public twooterUI()
     {
@@ -18,23 +18,23 @@ public class twooterUI extends JFrame
  
         usrLabel = new JLabel("Username");
         pswLabel = new JLabel("Password");
-        tf1 = new JTextField();
-        p1 = new JPasswordField();
-        btn1 = new JButton("Login");
+        usrTextInput = new JTextField();
+        passwordInput = new JPasswordField();
+        loginButton = new JButton("Login");
  
         label1.setBounds(100, 30, 400, 30);
         usrLabel.setBounds(80, 70, 200, 30);
         pswLabel.setBounds(80, 110, 200, 30);
-        tf1.setBounds(300, 70, 200, 30);
-        p1.setBounds(300, 110, 200, 30);
-        btn1.setBounds(150, 160, 100, 30);
+        usrTextInput.setBounds(300, 70, 200, 30);
+        passwordInput.setBounds(300, 110, 200, 30);
+        loginButton.setBounds(150, 160, 100, 30);
  
         frame.add(label1);
         frame.add(usrLabel);
-        frame.add(tf1);
+        frame.add(usrTextInput);
         frame.add(pswLabel);
-        frame.add(p1);
-        frame.add(btn1);
+        frame.add(passwordInput);
+        frame.add(loginButton);
  
         frame.setSize(600, 400);
         frame.setLayout(null);
