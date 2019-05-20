@@ -1,25 +1,31 @@
+import twooter.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Scanner;
+import java.io.*;
 
-public class twooterUI extends JFrame 
+
+public class TwooterUI extends JFrame implements ActionListener
 {
-    JLabel label1, usrLabel, pswLabel;
+    JLabel titleLabel, usrLabel, pswLabel;
     JTextField usrTextInput;
     JButton loginButton, registerButton;
     JPasswordField passwordInput;
     String password;
     String username;
+    
+    TwooterClient client = new TwooterClient();
 
-    public twooterUI()
+
+    public TwooterUI()
     {
         JFrame frame = new JFrame("Twooter Login");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        label1 = new JLabel("Welcome to Twooter.");
-        label1.setForeground(Color.blue);
-        label1.setFont(new Font("Serif", Font.BOLD, 20));
+        titleLabel = new JLabel("Welcome to Twooter.");
+        titleLabel.setForeground(Color.blue);
+        titleLabel.setFont(new Font("Serif", Font.BOLD, 20));
  
         usrLabel = new JLabel("Username");
         pswLabel = new JLabel("Password");
@@ -28,7 +34,7 @@ public class twooterUI extends JFrame
         loginButton = new JButton("Login");
         registerButton = new JButton("Sign Up");
  
-        label1.setBounds(100, 30, 400, 30);
+        titleLabel.setBounds(100, 30, 400, 30);
         usrLabel.setBounds(80, 70, 200, 30);
         pswLabel.setBounds(80, 110, 200, 30);
         usrTextInput.setBounds(300, 70, 200, 30);
@@ -36,7 +42,7 @@ public class twooterUI extends JFrame
         loginButton.setBounds(150, 160, 100, 30);
         registerButton.setBounds(320, 160, 100, 30);
  
-        frame.add(label1);
+        frame.add(titleLabel);
         frame.add(usrLabel);
         frame.add(usrTextInput);
         frame.add(pswLabel);
@@ -47,10 +53,35 @@ public class twooterUI extends JFrame
         frame.setSize(600, 400);
         frame.setLayout(null);
         frame.setVisible(true);
+
+        loginButton.addActionListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        String usrInput = usrTextInput.getText();
+        BufferedWriter bfWrite = null;
+        try(PrintWriter output = new PrintWriter("users.txt"))
+        {
+            bfWrite = new BufferedWriter(new FileWriter("users.txt"));
+            String genToken = client.registerName(usrInput);
+            bfWrite.write(usrInput);
+            bfWrite.write(genToken);
+        }
+        catch(IOException a){}
+        finally
+        {
+            try{
+                if (bfWrite != null)
+                bfWrite.close();
+            }
+            catch (IOException z){}
+        }
     }
 
     public static void main(String[] args)
     {
-        new twooterUI();
+        TwooterUI ui = new TwooterUI();
     }
 }
