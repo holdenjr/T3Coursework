@@ -14,6 +14,7 @@ public class TwooterUI extends JFrame implements ActionListener
     JPasswordField passwordInput;
     String password;
     String username;
+    String[] usrArray; 
     
     TwooterClient client = new TwooterClient();
 
@@ -62,6 +63,7 @@ public class TwooterUI extends JFrame implements ActionListener
     {
         String usrInput = usrTextInput.getText();
         BufferedWriter bfWrite = null;
+        
         try(PrintWriter output = new PrintWriter("users.txt"))
         {
             bfWrite = new BufferedWriter(new FileWriter("users.txt"));
@@ -72,7 +74,8 @@ public class TwooterUI extends JFrame implements ActionListener
         catch(IOException a){}
         finally
         {
-            try{
+            try
+            {
                 if (bfWrite != null)
                 bfWrite.close();
             }
